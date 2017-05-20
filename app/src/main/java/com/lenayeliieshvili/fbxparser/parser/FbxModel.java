@@ -1,10 +1,14 @@
 package com.lenayeliieshvili.fbxparser.parser;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
+
+import static android.opengl.GLES20.GL_UNSIGNED_INT;
 
 public class FbxModel {
 
@@ -18,11 +22,6 @@ public class FbxModel {
         mGeometries.add(geometry);
     }
 
-    public void addGeometries(List<Geometry> geometries) {
-        mGeometries.clear();
-        mGeometries.addAll(geometries);
-    }
-
     public Geometry getLastAddedGeometry() {
         return mGeometries.get(mGeometries.size() - 1);
     }
@@ -32,21 +31,25 @@ public class FbxModel {
     }
 
     public void draw(GL10 gl) {
-        Geometry currentGeometry = mGeometries.get(0);
-        gl.glFrontFace(GL10.GL_CW);
-        gl.glColor4f(1,0,1,1);
+        if (!mGeometries.isEmpty()) {
+            Geometry currentGeometry = mGeometries.get(0);
+            gl.glFrontFace(GL10.GL_CW);
+             gl.glColor4f(0.8f,0.8f,0.8f, 1f);
 
-        gl.glVertexPointer(3, GL10.GL_FLOAT, 3*4, currentGeometry.getVertex().getVertexBuffer());
-       // gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
+            gl.glVertexPointer(3, GL10.GL_FLOAT, 3*4, currentGeometry.getVertex().getVertexBuffer());
+            gl.glColorPointer(4, GL10.GL_FLOAT, 3*4, currentGeometry.getVertex().getColorBuffer());
 
-        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-       // gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
+            gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+            gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
 
-        gl.glDrawElements(currentGeometry.getIndex().getDrawMode(),
-                currentGeometry.getIndex().getIndicies().length, GL10.GL_UNSIGNED_SHORT,
-                currentGeometry.getIndex().getIndexBuffer());
+            gl.glDrawElements(GL10.GL_TRIANGLES,
+                    currentGeometry.getIndex().getIndicies().length, GL_UNSIGNED_INT,
+                    currentGeometry.getIndex().getIndexBuffer());
 
-        gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-      //  gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
+            gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+            gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
+        } else {
+            Log.d(FbxModel.class.getSimpleName(), "No geometries");
+        }
     }
 }

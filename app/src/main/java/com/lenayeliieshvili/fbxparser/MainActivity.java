@@ -1,6 +1,5 @@
 package com.lenayeliieshvili.fbxparser;
 
-import android.opengl.GLSurfaceView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     //// TODO: 5/17/17 add gesture listeners
     private FbxModel mFbxModel;
-    private GLSurfaceView glSurfaceView;
+    private GestureGlSurfaceView mGlSurfaceView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); // (NEW)
 
         try {
-            new ReadFileTask().execute(getAssets().open("cube.fbx"));
+            new ReadFileTask().execute(getAssets().open("teapot.fbx"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createRender() {
-        glSurfaceView = new GLSurfaceView(this);
-        glSurfaceView.setRenderer(new CustomRender(mFbxModel));
-        setContentView(glSurfaceView);
+        mGlSurfaceView = new GestureGlSurfaceView(this);
+        mGlSurfaceView.setRenderer(new CustomRender(mFbxModel));
+        setContentView(mGlSurfaceView);
 
     }
 
@@ -62,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             FbxModel fbxModel = new FbxModel();
             String currentObj = "";
             boolean isReadingArray = false;
-            StringBuilder stringBuilder = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(params[0]));
             String line = "";
             try {
@@ -105,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                         isReadingArray = false;
                         currentObj = "";
                     }
-                    stringBuilder.append(line);
                 }
                 reader.close();
 

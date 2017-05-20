@@ -3,23 +3,23 @@ package com.lenayeliieshvili.fbxparser.parser;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.ShortBuffer;
+import java.nio.IntBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
 public class GeometryIndex {
 
-    private short[] mIndicies;
+    private int[] mIndicies;
     private StringBuilder mIndexStr = new StringBuilder();
     private int mDrawMode;
     //// TODO: 5/17/17 try to use int buffer
-    private ShortBuffer mIndexBuffer;
+    private IntBuffer mIndexBuffer;
 
 
     public GeometryIndex() {
     }
 
-    public GeometryIndex(short[] indicies) {
+    public GeometryIndex(int[] indicies) {
         mIndicies = indicies;
     }
 
@@ -36,13 +36,13 @@ public class GeometryIndex {
         String result = mIndexStr.toString().replaceAll(FbxKeys.REGEX_CLEAN, FbxKeys.REPLACE_EMPTY);
        /// result = result.replaceAll("\\}", FbxKeys.REPLACE_EMPTY);
         String[] split = result.split(",");
-        mIndicies = new short[split.length];
+        mIndicies = new int[split.length];
         try {
             for (int i = 0; i < split.length; i++) {
-                mIndicies[i] = Short.parseShort(split[i]);
+                mIndicies[i] = Integer.parseInt(split[i]);
                 if (mIndicies[i] < 0) {
                     if (i == 3) mDrawMode = GL10.GL_TRIANGLE_FAN;
-                    else if (i == 2) mDrawMode = GL10.GL_TRIANGLE_STRIP;
+                    else if (i == 2) mDrawMode = GL10.GL_TRIANGLES;
                     mIndicies[i] = (short) (Math.abs(mIndicies[i]) - 1);
                 }
             }
@@ -52,23 +52,23 @@ public class GeometryIndex {
         }
     }
 
-    public short[] getIndicies() {
+    public int[] getIndicies() {
         return mIndicies;
     }
 
-    public void setIndicies(short[] indicies) {
+    public void setIndicies(int[] indicies) {
         mIndicies = indicies;
     }
 
     private void initBuffer() {
-        ByteBuffer indexBuffer = ByteBuffer.allocateDirect(Short.SIZE/8 * mIndicies.length);
+        ByteBuffer indexBuffer = ByteBuffer.allocateDirect(Integer.SIZE/8 * mIndicies.length);
         indexBuffer.order(ByteOrder.nativeOrder());
-        mIndexBuffer = indexBuffer.asShortBuffer();
+        mIndexBuffer = indexBuffer.asIntBuffer();
         mIndexBuffer.put(mIndicies);
         mIndexBuffer.position(0);
     }
 
-    public ShortBuffer getIndexBuffer() {
+    public IntBuffer getIndexBuffer() {
         return mIndexBuffer;
     }
 

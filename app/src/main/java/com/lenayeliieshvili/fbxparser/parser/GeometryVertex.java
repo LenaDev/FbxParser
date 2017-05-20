@@ -8,9 +8,17 @@ import java.nio.FloatBuffer;
 public class GeometryVertex {
 
     private float[] mVertices;
+    private float[] mColors;
+
+    float[] colors = {
+            1f, 1f, 0f, 1f, // vertex 0 red
+            0f, 1f, 1f, 1f, // vertex 1 green
+            1f, 0f, 1f, 1f // vertex 2 blue
+    };
 
     private StringBuilder mVerticesStr = new StringBuilder();
     private FloatBuffer mVertexBuffer;
+    private FloatBuffer mColorBuffer;
 
     public GeometryVertex() {
 
@@ -42,9 +50,11 @@ public class GeometryVertex {
         String result = mVerticesStr.toString().replaceAll(FbxKeys.REGEX_CLEAN, FbxKeys.REPLACE_EMPTY);
         String[] split = result.split(",");
         mVertices = new float[split.length];
+        mColors = new float[split.length];
         try {
             for (int i = 0; i < split.length; i++) {
                 mVertices[i] = Float.parseFloat(split[i]);
+                mColors[i] = colors[i % colors.length];
             }
             initBuffer();
         } catch (NumberFormatException e) {
@@ -58,9 +68,19 @@ public class GeometryVertex {
         mVertexBuffer = vertexByteBuffer.asFloatBuffer();
         mVertexBuffer.put(mVertices);
         mVertexBuffer.position(0);
+
+        ByteBuffer colorBuffer = ByteBuffer.allocateDirect(mColors.length * 4);
+        colorBuffer.order(ByteOrder.nativeOrder());
+        mColorBuffer = colorBuffer.asFloatBuffer();
+        mColorBuffer.put(mColors);
+        mColorBuffer.position(0);
     }
 
     public FloatBuffer getVertexBuffer() {
         return mVertexBuffer;
+    }
+
+    public FloatBuffer getColorBuffer() {
+        return mColorBuffer;
     }
 }

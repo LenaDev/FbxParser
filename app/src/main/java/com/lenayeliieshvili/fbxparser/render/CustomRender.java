@@ -13,6 +13,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
     private FbxModel mFbxModel;
     private float mCubeRotation;
+    private float scale = 0.2f;
 
     public CustomRender(FbxModel model) {
         mFbxModel = model;
@@ -49,11 +50,16 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
         gl.glTranslatef(0.0f, 0.0f, -10);
         gl.glRotatef(mCubeRotation, 1.0f, 1.0f, 1.0f);
+        gl.glScalef(scale, scale, scale);
 
         mFbxModel.draw(gl);
 
         gl.glLoadIdentity();
 
         mCubeRotation += 0.2f;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 }
