@@ -3,6 +3,7 @@ package com.lenayeliieshvili.fbxparser;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -10,7 +11,6 @@ import com.lenayeliieshvili.fbxparser.parser.FbxModel;
 import com.lenayeliieshvili.fbxparser.parser.Geometry;
 import com.lenayeliieshvili.fbxparser.parser.GeometryIndex;
 import com.lenayeliieshvili.fbxparser.parser.GeometryVertex;
-import com.lenayeliieshvili.fbxparser.render.CustomRender;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     //// TODO: 5/17/17 add gesture listeners
     private FbxModel mFbxModel;
     private GestureGlSurfaceView mGlSurfaceView;
+    private float density;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE); // (NEW)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); // (NEW)
+
+
+        final DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        density = displayMetrics.density;
 
         try {
             new ReadFileTask().execute(getAssets().open("teapot.fbx"));
@@ -49,11 +55,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createRender() {
-        mGlSurfaceView = new GestureGlSurfaceView(this);
-        mGlSurfaceView.setRenderer(new CustomRender(mFbxModel));
+        mGlSurfaceView = new GestureGlSurfaceView(this, mFbxModel);
+        mGlSurfaceView.setDensity(density);
         setContentView(mGlSurfaceView);
 
     }
+
 
     public class ReadFileTask extends AsyncTask<InputStream, Integer, FbxModel> {
         @Override

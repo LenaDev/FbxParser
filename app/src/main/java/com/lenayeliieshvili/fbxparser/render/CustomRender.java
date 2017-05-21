@@ -13,7 +13,15 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
     private FbxModel mFbxModel;
     private float mCubeRotation;
-    private float scale = 0.2f;
+    private float scale;
+    private float mX = 0;
+    private float mY = 0;
+    private float mZ = -10f;
+    int mWidth;
+    int mHeight;
+    private float mAngle = 45f;
+    public float mDeltaX;
+    public float mDeltaY;
 
     public CustomRender(FbxModel model) {
         mFbxModel = model;
@@ -33,7 +41,9 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        gl.glViewport(0, 0, width, height);
+        mWidth = width;
+        mHeight = height;
+        gl.glViewport(0, 0, mWidth, mHeight);
         gl.glMatrixMode(GL10.GL_PROJECTION);
         gl.glLoadIdentity();
         GLU.gluPerspective(gl, 45.0f, (float)width / (float)height, 0.1f, 100.0f);
@@ -48,9 +58,16 @@ public class CustomRender implements GLSurfaceView.Renderer {
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(0.0f, 0.0f, -10);
-        gl.glRotatef(mCubeRotation, 1.0f, 1.0f, 1.0f);
+        gl.glTranslatef(0, 0, mZ);
+        gl.glRotatef(mDeltaY, 1.0f, 0f, 0.0f);
+        gl.glRotatef(mDeltaX, 0.0f, 1f, 0.0f);
         gl.glScalef(scale, scale, scale);
+        //gl.glViewport(mX, mY, mWidth, mHeight);
+
+
+       // Matrix.rotateM();
+
+
 
         mFbxModel.draw(gl);
 
@@ -62,4 +79,34 @@ public class CustomRender implements GLSurfaceView.Renderer {
     public void setScale(float scale) {
         this.scale = scale;
     }
+
+    public void setTranslation(float x, float y) {
+        mX = x;
+        mY = y;
+    }
+
+    public float getX() {
+        return mX;
+    }
+
+    public float getY() {
+        return mY;
+    }
+
+    /**
+     * Returns the rotation angle of the triangle shape (mTriangle).
+     *
+     * @return - A float representing the rotation angle.
+     */
+    public float getAngle() {
+        return mAngle;
+    }
+
+    /**
+     * Sets the rotation angle of the triangle shape (mTriangle).
+     */
+    public void setAngle(float angle) {
+        mAngle = angle;
+    }
+
 }
