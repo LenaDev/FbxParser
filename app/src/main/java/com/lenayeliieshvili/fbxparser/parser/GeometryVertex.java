@@ -11,9 +11,10 @@ public class GeometryVertex {
     private float[] mColors;
 
     float[] colors = {
-            0f, 1f, 1f,
-            0f, 0.3f, 0.3f,
-            0f, 0.5f, 0.5f
+            0.7f, 0.7f, 1f,
+            0.8f, 0.8f, 1f
+//            0f, 1f, 0.5f,
+//            0f, 1f, 0.7f
 
     };
 
@@ -41,14 +42,12 @@ public class GeometryVertex {
         mVerticesStr.append(str);
     }
 
-    public String getStrVertex() {
-        return mVerticesStr.toString();
-    }
 
     public void convertStringToArray() {
         int index = mVerticesStr.indexOf(FbxKeys.ARRAY);
         mVerticesStr.delete(index, index + FbxKeys.ARRAY.length());
         String result = mVerticesStr.toString().replaceAll(FbxKeys.REGEX_CLEAN, FbxKeys.REPLACE_EMPTY);
+        mVerticesStr = null;
         String[] split = result.split(",");
         mVertices = new float[split.length];
         mColors = new float[split.length];

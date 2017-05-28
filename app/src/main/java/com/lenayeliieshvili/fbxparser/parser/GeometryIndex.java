@@ -1,49 +1,42 @@
 package com.lenayeliieshvili.fbxparser.parser;
 
 
+import android.opengl.GLES20;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
-
-import javax.microedition.khronos.opengles.GL10;
 
 public class GeometryIndex {
 
     private int[] mIndicies;
     private StringBuilder mIndexStr = new StringBuilder();
     private int mDrawMode;
-    //// TODO: 5/17/17 try to use int buffer
+
     private IntBuffer mIndexBuffer;
 
 
     public GeometryIndex() {
     }
 
-    public GeometryIndex(int[] indicies) {
-        mIndicies = indicies;
-    }
-
     public void setIndexStr(String str) {
         mIndexStr.append(str);
-    }
-    public String getIndexStr() {
-        return mIndexStr.toString();
     }
 
     public void convertStringToArray() {
         int index = mIndexStr.indexOf(FbxKeys.ARRAY);
         mIndexStr.delete(index, index + FbxKeys.ARRAY.length());
         String result = mIndexStr.toString().replaceAll(FbxKeys.REGEX_CLEAN, FbxKeys.REPLACE_EMPTY);
-       /// result = result.replaceAll("\\}", FbxKeys.REPLACE_EMPTY);
+        mIndexStr = null;
         String[] split = result.split(",");
         mIndicies = new int[split.length];
         try {
             for (int i = 0; i < split.length; i++) {
                 mIndicies[i] = Integer.parseInt(split[i]);
                 if (mIndicies[i] < 0) {
-                    if (i == 3) mDrawMode = GL10.GL_TRIANGLE_FAN;
-                    else if (i == 2) mDrawMode = GL10.GL_TRIANGLES;
-                    mIndicies[i] = (short) (Math.abs(mIndicies[i]) - 1);
+                    if (i == 3) mDrawMode = GLES20.GL_LINES;
+                    else if (i == 2) mDrawMode = GLES20.GL_TRIANGLES;
+                    mIndicies[i] = (Math.abs(mIndicies[i]) - 1);
                 }
             }
             initBuffer();

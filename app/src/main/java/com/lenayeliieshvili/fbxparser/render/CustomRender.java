@@ -5,6 +5,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
 
 import com.lenayeliieshvili.fbxparser.parser.FbxModel;
+import com.lenayeliieshvili.fbxparser.parser.Geometry;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -53,17 +54,23 @@ public class CustomRender implements GLSurfaceView.Renderer {
         gl.glLoadIdentity();
     }
 
+
     @Override
     public void onDrawFrame(GL10 gl) {
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(0, -2.5f, mZ);
-        gl.glRotatef(mDeltaY, 1.0f, 0f, 0.0f);
-        gl.glRotatef(mDeltaX, 0.0f, 1f, 0.0f);
+
+        gl.glRotatef(mDeltaY, 1.0f, 0f, 0f);
+        gl.glRotatef(mDeltaX, 0f, 1f, 0.0f);
         gl.glScalef(scale, scale, scale);
 
-        mFbxModel.draw(gl);
+        gl.glTranslatef(mX, -2.5f, mZ);
+
+        for (Geometry geometry : mFbxModel.getGeometries()) {
+            mFbxModel.draw(gl, geometry);
+
+        }
 
         gl.glLoadIdentity();
 
