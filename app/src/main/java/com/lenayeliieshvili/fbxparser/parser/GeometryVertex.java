@@ -11,9 +11,10 @@ public class GeometryVertex {
     private float[] mColors;
 
     float[] colors = {
-            1f, 1f, 0f, 1f, // vertex 0 red
-            0f, 1f, 1f, 1f, // vertex 1 green
-            1f, 0f, 1f, 1f // vertex 2 blue
+            0f, 1f, 1f,
+            0f, 0.3f, 0.3f,
+            0f, 0.5f, 0.5f
+
     };
 
     private StringBuilder mVerticesStr = new StringBuilder();

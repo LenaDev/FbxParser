@@ -4,8 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.lenayeliieshvili.fbxparser.parser.FbxModel;
 import com.lenayeliieshvili.fbxparser.parser.Geometry;
@@ -28,7 +27,6 @@ import static com.lenayeliieshvili.fbxparser.parser.FbxKeys.VERTICES;
 
 public class MainActivity extends AppCompatActivity {
 
-    //// TODO: 5/17/17 add gesture listeners
     private FbxModel mFbxModel;
     private GestureGlSurfaceView mGlSurfaceView;
     private float density;
@@ -36,19 +34,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE); // (NEW)
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN); // (NEW)
-
 
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         density = displayMetrics.density;
 
-        try {
-            new ReadFileTask().execute(getAssets().open("teapot.fbx"));
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        String filename;
+        if (getIntent() != null) {
+            filename = getIntent().getStringExtra("file_name");
+
+            try {
+                new ReadFileTask().execute(getAssets().open(filename));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            setContentView(R.layout.activity_main);
+            Toast.makeText(this, "Can't open file", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -58,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         mGlSurfaceView = new GestureGlSurfaceView(this, mFbxModel);
         mGlSurfaceView.setDensity(density);
         setContentView(mGlSurfaceView);
-
     }
 
 

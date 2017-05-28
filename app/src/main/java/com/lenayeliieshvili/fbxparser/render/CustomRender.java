@@ -16,7 +16,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
     private float scale;
     private float mX = 0;
     private float mY = 0;
-    private float mZ = -10f;
+    private float mZ = -25f;
     int mWidth;
     int mHeight;
     private float mAngle = 45f;
@@ -58,22 +58,16 @@ public class CustomRender implements GLSurfaceView.Renderer {
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-        gl.glTranslatef(0, 0, mZ);
+        gl.glTranslatef(0, -2.5f, mZ);
         gl.glRotatef(mDeltaY, 1.0f, 0f, 0.0f);
         gl.glRotatef(mDeltaX, 0.0f, 1f, 0.0f);
         gl.glScalef(scale, scale, scale);
-        //gl.glViewport(mX, mY, mWidth, mHeight);
-
-
-       // Matrix.rotateM();
-
-
 
         mFbxModel.draw(gl);
 
         gl.glLoadIdentity();
 
-        mCubeRotation += 0.2f;
+       // mCubeRotation += 0.2f;
     }
 
     public void setScale(float scale) {
