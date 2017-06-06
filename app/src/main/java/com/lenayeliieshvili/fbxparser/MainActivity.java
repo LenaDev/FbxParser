@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.lenayeliieshvili.fbxparser.parser.FbxModel;
@@ -30,20 +32,24 @@ public class MainActivity extends AppCompatActivity {
     private FbxModel mFbxModel;
     private GestureGlSurfaceView mGlSurfaceView;
     private float density;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         final DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         density = displayMetrics.density;
 
 
+        mProgressBar = (ProgressBar) findViewById(R.id.progress);
+        mProgressBar.setIndeterminate(true);
+
         String filename;
         if (getIntent() != null) {
             filename = getIntent().getStringExtra("file_name");
-
             try {
                 new ReadFileTask().execute(getAssets().open(filename));
             } catch (IOException e) {
@@ -58,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createRender() {
+        mProgressBar.setVisibility(View.GONE);
         mGlSurfaceView = new GestureGlSurfaceView(this, mFbxModel);
         mGlSurfaceView.setDensity(density);
         setContentView(mGlSurfaceView);
@@ -119,22 +126,28 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            return fbxModel;
-        }
-
-        @Override
-        protected void onPostExecute(FbxModel model) {
-            mFbxModel = model;
-            List<Geometry> geometries = model.getGeometries();
+            List<Geometry> geometries = fbxModel.getGeometries();
             for (Geometry g : geometries) {
-                if(g.getIndex() != null)  {
+                if (g.getIndex() != null) {
                     g.getIndex().convertStringToArray();
                 }
                 if (g.getVertex() != null) {
                     g.getVertex().convertStringToArray();
                 }
             }
+
+            return fbxModel;
+        }
+
+        @Override
+        protected void onPostExecute(FbxModel model) {
+            mFbxModel = model;
             createRender();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
         }
     }
 }

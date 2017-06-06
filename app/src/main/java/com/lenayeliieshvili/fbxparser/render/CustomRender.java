@@ -60,16 +60,14 @@ public class CustomRender implements GLSurfaceView.Renderer {
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-
-        gl.glRotatef(mDeltaY, 1.0f, 0f, 0f);
-        gl.glRotatef(mDeltaX, 0f, 1f, 0.0f);
+        //todo try to move in onSurfaceChanged
+        gl.glTranslatef(0, -2.5f, mZ);
+        gl.glRotatef(mDeltaY, 1.0f, 0f, 0.0f);
+        gl.glRotatef(mDeltaX, 0.0f, 1f, 0.0f);
         gl.glScalef(scale, scale, scale);
-
-        gl.glTranslatef(mX, -2.5f, mZ);
 
         for (Geometry geometry : mFbxModel.getGeometries()) {
             mFbxModel.draw(gl, geometry);
-
         }
 
         gl.glLoadIdentity();
