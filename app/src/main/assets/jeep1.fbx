@@ -862,7 +862,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 4345345024, "Model::main", "Mesh" {
+	Model: 4345345024, "Model::com.lenayeliieshvili.fbxparser.main", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -971,7 +971,7 @@ Connections:  {
 	;Model::lsteer, Model::RootNode
 	C: "OO",4345341440,0
 	
-	;Model::main, Model::RootNode
+	;Model::com.lenayeliieshvili.fbxparser.main, Model::RootNode
 	C: "OO",4345345024,0
 	
 	;Geometry::, Model::frw
@@ -1010,10 +1010,10 @@ Connections:  {
 	;Material::Material01, Model::lsteer
 	C: "OO",4308658832,4345341440
 	
-	;Geometry::, Model::main
+	;Geometry::, Model::com.lenayeliieshvili.fbxparser.main
 	C: "OO",4305555840,4345345024
 	
-	;Material::Material01, Model::main
+	;Material::Material01, Model::com.lenayeliieshvili.fbxparser.main
 	C: "OO",4308658832,4345345024
 	
 	;Texture::jeep1.jpg, Material::Material01

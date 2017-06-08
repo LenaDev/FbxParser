@@ -1,11 +1,11 @@
-package com.lenayeliieshvili.fbxparser.render;
+package com.lenayeliieshvili.fbxparser.opengl;
 
 
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
 
-import com.lenayeliieshvili.fbxparser.parser.FbxModel;
-import com.lenayeliieshvili.fbxparser.parser.Geometry;
+import com.lenayeliieshvili.fbxparser.fbx.FbxModel;
+import com.lenayeliieshvili.fbxparser.fbx.Geometry;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;

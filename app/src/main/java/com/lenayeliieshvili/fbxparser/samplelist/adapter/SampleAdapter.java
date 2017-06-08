@@ -1,4 +1,4 @@
-package com.lenayeliieshvili.fbxparser.adapter;
+package com.lenayeliieshvili.fbxparser.samplelist.adapter;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lenayeliieshvili.fbxparser.ItemClickListener;
 import com.lenayeliieshvili.fbxparser.R;
+import com.lenayeliieshvili.fbxparser.samplelist.ItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

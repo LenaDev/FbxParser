@@ -1,4 +1,4 @@
-package com.lenayeliieshvili.fbxparser;
+package com.lenayeliieshvili.fbxparser.opengl;
 
 
 import android.content.Context;
@@ -7,8 +7,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
-import com.lenayeliieshvili.fbxparser.parser.FbxModel;
-import com.lenayeliieshvili.fbxparser.render.CustomRender;
+import com.lenayeliieshvili.fbxparser.fbx.FbxModel;
 
 public class GestureGlSurfaceView extends GLSurfaceView {
 

@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.lenayeliieshvili.fbxparser.MainActivity"
+    tools:context="com.lenayeliieshvili.fbxparser.main.MainActivity"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ProgressBar

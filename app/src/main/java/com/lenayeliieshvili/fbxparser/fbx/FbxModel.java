@@ -1,4 +1,4 @@
-package com.lenayeliieshvili.fbxparser.parser;
+package com.lenayeliieshvili.fbxparser.fbx;
 
 
 import android.opengl.GLES20;

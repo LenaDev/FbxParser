@@ -1,4 +1,4 @@
-package com.lenayeliieshvili.fbxparser;
+package com.lenayeliieshvili.fbxparser.samplelist;
 
 
 public interface ItemClickListener {
