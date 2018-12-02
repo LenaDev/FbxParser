@@ -1,6 +1,7 @@
 package com.lenayeliieshvili.fbxparser.samplelist;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,12 @@ public class ListActivity extends AppCompatActivity implements ItemClickListener
     private RecyclerView mRecycler;
     private SampleAdapter mAdapter;
     private List<String> mData = new ArrayList<>();
+
+    public static Intent getLaunchIntent(Context context) {
+        Intent starter = new Intent(context, ListActivity.class);
+        return starter;
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

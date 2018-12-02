@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            app:title="Menu"
+            app:titleTextColor="@android:color/white"
+            android:layout_height="?actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <Button
+            android:id="@+id/btn_fbx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FBX"/>
+
+        <Button
+            android:id="@+id/btn_collada"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Collada"/>
+
+        <Button
+            android:id="@+id/btn_obj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OBJ"/>
+
+        <Button
+            android:id="@+id/btn_stl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STL"/>
+
+        <Button
+            android:id="@+id/btn_storage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="External storage"/>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

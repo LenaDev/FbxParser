@@ -1,0 +1,4 @@
+Unable to locate texture file "D:\projects\assimp_int\test\models\OBJ\drkwood2.jpg".
+Unable to locate texture file "D:\projects\assimp_int\test\models\OBJ\wal67ar_small.jpg".
+Unable to locate texture file "D:\projects\assimp_int\test\models\OBJ\engineflare1.jpg".
+Unable to locate texture file "D:\projects\assimp_int\test\models\OBJ\SpiderTex.jpg".

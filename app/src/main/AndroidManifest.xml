@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lenayeliieshvili.fbxparser">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -16,14 +18,21 @@
 
         <activity android:name=".samplelist.ListActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".main.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".menu.MenuActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
-
-        <activity android:name=".main.MainActivity"
+        <activity android:name=".model_loader.ModelActivity"
             android:screenOrientation="portrait"/>
     </application>
 

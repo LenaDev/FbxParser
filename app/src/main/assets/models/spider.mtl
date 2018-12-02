@@ -1,0 +1,40 @@
+# 
+# Wavefront material file
+# Created with Kaydara FBX
+# 
+
+newmtl BeinTex
+map_Kd drkwood2.jpg
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 0.000000
+Tr 1.000000
+
+newmtl Skin
+map_Kd wal67ar_small.jpg
+Ka 0.000000 0.000000 0.000000
+Kd 0.827451 0.792157 0.772549
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 0.000000
+Tr 1.000000
+
+newmtl Augentex
+map_Kd engineflare1.jpg
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 0.000000
+Tr 1.000000
+
+newmtl HLeibTex
+map_Kd SpiderTex.jpg
+Ka 0.000000 0.000000 0.000000
+Kd 0.690196 0.639216 0.615686
+Ks 0.000000 0.000000 0.000000
+illum 2
+Ns 0.000000
+Tr 1.000000
